@@ -23,7 +23,7 @@
 {% compress js %}
 <script type="text/javascript">
   if (refreshActiveComponent) {
-    refreshActiveComponent('cabotapp/_instance_list.html', '_instance_list_container', '_instance_list')
+    refreshActiveComponent(location.pathname, '_instance_list_container', '_instance_list')
   }
 </script>
 {% endcompress %}
