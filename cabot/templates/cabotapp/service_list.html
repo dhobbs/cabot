@@ -9,8 +9,10 @@
       <h2><a href="{% url "create-service" %}" title="New service"><i class="glyphicon glyphicon-plus"></i></a></h2>
     </div>
   </div>
-  <div class="col-xs-12">
-    {% include 'cabotapp/_service_list.html' %}
+  <div id="_service_list_container">
+    <div class="col-xs-12" id="_service_list">
+      {% include 'cabotapp/_service_list.html' %}
+    </div>
   </div>
 </div>
 {% endblock content %}
@@ -28,6 +30,11 @@
       sLengthMenu: "_MENU_ records per page"
     fnDrawCallback: () ->
       $('.sparktristate').sparkline('html', {type: 'tristate'})
+</script>
+<script type="text/javascript">
+  if (refreshActiveComponent) {
+    refreshActiveComponent('cabotapp/_service_list.html', '_service_list_container', '_service_list')
+  }
 </script>
 {% endcompress %}
 {% endblock js %}

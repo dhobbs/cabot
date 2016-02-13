@@ -9,8 +9,10 @@
       <h2><a href="{% url "create-instance" %}" title="New instance"><i class="glyphicon glyphicon-plus"></i></a></h2>
     </div>
   </div>
-  <div class="col-xs-12">
-    {% include 'cabotapp/_instance_list.html' %}
+  <div id="_instance_list_container">
+    <div class="col-xs-12" id="_instance_list">
+      {% include 'cabotapp/_instance_list.html' %}
+    </div>
   </div>
 </div>
 {% endblock content %}
@@ -19,8 +21,10 @@
 {% load compress %}
 {{ block.super }}
 {% compress js %}
-<script type="text/coffeescript">
-
+<script type="text/javascript">
+  if (refreshActiveComponent) {
+    refreshActiveComponent('cabotapp/_instance_list.html', '_instance_list_container', '_instance_list')
+  }
 </script>
 {% endcompress %}
 {% endblock js %}
