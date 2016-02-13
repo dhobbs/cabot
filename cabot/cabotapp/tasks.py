@@ -36,6 +36,12 @@ def run_status_check(check_or_id):
     check.run()
 
 
+# Don't make any DB calls
+@task(ignore_result=True)
+def run_check(check):
+    check.run()
+
+
 @task(ignore_result=True)
 def run_all_checks():
     from .models import StatusCheck
@@ -48,7 +54,7 @@ def run_all_checks():
         if (not check.last_run) or timezone.now() > next_schedule:
             delay = random.choice(seconds)
             logger.debug('Scheduling task for %s seconds from now' % delay)
-            run_status_check.apply_async((check.id,), countdown=delay)
+            run_check.apply_async((check,), countdown=delay)
 
 
 @task(ignore_result=True)
